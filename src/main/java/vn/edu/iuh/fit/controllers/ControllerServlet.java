@@ -11,8 +11,10 @@ import jakarta.servlet.http.HttpServletResponse;
 import vn.edu.iuh.fit.connection.Connection;
 import vn.edu.iuh.fit.entities.Account;
 import vn.edu.iuh.fit.entities.GrantAccess;
+import vn.edu.iuh.fit.entities.Log;
 import vn.edu.iuh.fit.entities.Role;
 import vn.edu.iuh.fit.respositories.AccountRespository;
+import vn.edu.iuh.fit.respositories.LogRespository;
 import vn.edu.iuh.fit.respositories.RoleRespository;
 
 import java.io.IOException;
@@ -24,8 +26,10 @@ import java.util.List;
 public class ControllerServlet extends HttpServlet {
     private AccountRespository accountRespository = new AccountRespository();
     private RoleRespository roleRespository = new RoleRespository();
+    private LogRespository logRespository = new LogRespository();
     private RequestDispatcher requestDispatcher = null;
-    private LocalDateTime timeLogin;
+    private LocalDateTime timeLogin = null;
+    private Account account = null;
     private LocalDateTime timeLogout;
 
     @Override
@@ -67,7 +71,7 @@ public class ControllerServlet extends HttpServlet {
             requestDispatcher = getServletContext().getRequestDispatcher("/manageUsers.jsp");
             requestDispatcher.forward(req, resp);
         } else if (logout!=null) {
-            timeLogout = LocalDateTime.now();
+            handleLogOut(req, resp);
             requestDispatcher = getServletContext().getRequestDispatcher("/index.jsp");
             requestDispatcher.forward(req, resp);
         }
@@ -83,10 +87,12 @@ public class ControllerServlet extends HttpServlet {
         timeLogin = LocalDateTime.now();
         String email = req.getParameter("email");
         String password = req.getParameter("pswd");
-        Account account = accountRespository.getAccountByEmailAndPassword(email, password);
+        account = accountRespository.getAccountByEmailAndPassword(email, password);
         if (account != null) {
             List<Role> roles = accountRespository.getRoleFromAccountID(account.getId());
             if (roles != null) {
+                Log log = new Log(account, timeLogin, null,"");
+                logRespository.addLog(log);
                 String roleNames = roleRespository.getRoleName(roles).toString();
                 roleNames = roleNames.substring(1,roleNames.length()-1);
                 if (roleNames.contains("admin")) {
@@ -147,5 +153,11 @@ public class ControllerServlet extends HttpServlet {
         String roleId = roleRespository.getRoleIdFromRoleName(roleName);
         String note = req.getParameter("grant_acc_note");
         return accountRespository.grantAccount(accountId, roleId, note);
+    }
+    public void handleLogOut(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        timeLogout = LocalDateTime.now();
+        Log log = new Log(logRespository.getLogId(account, timeLogin),account, timeLogin, timeLogout,"");
+        System.out.println(log);
+        logRespository.updateLog(log);
     }
 }

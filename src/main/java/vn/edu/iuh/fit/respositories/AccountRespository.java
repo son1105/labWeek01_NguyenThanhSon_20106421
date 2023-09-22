@@ -74,6 +74,7 @@ public class AccountRespository {
         }
         return null;
     }
+
     public Account getAccountByEmailAndPassword(String email, String password){
         transaction.begin();
         try{

@@ -20,6 +20,13 @@ public class Log {
     public Log() {
     }
 
+    public Log(Account account, LocalDateTime loginTime, LocalDateTime logoutTime, String notes) {
+        this.account = account;
+        this.loginTime = loginTime;
+        this.logoutTime = logoutTime;
+        this.notes = notes;
+    }
+
     public Log(long id, Account account, LocalDateTime loginTime, LocalDateTime logoutTime, String notes) {
         this.id = id;
         this.account = account;
