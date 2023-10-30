@@ -1,4 +1,4 @@
-package vn.edu.iuh.fit.respositories;
+package vn.edu.iuh.fit.repositories;
 
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityTransaction;
@@ -8,11 +8,11 @@ import vn.edu.iuh.fit.entities.Log;
 
 import java.time.LocalDateTime;
 
-public class LogRespository {
-    private EntityManager entityManager;
-    private EntityTransaction transaction;
+public class LogRepository {
+    private final EntityManager entityManager;
+    private final EntityTransaction transaction;
 
-    public LogRespository() {
+    public LogRepository() {
         entityManager = Connection.getInstance().getEntityManagerFactory().createEntityManager();
         transaction = entityManager.getTransaction();
     }
@@ -22,8 +22,8 @@ public class LogRespository {
             entityManager.persist(log);
             transaction.commit();
             return true;
-        }catch (Exception e){
-            e.printStackTrace();
+        }catch (Exception exception){
+            System.out.println(exception.getMessage());
             transaction.rollback();
         }
         return false;
@@ -34,8 +34,8 @@ public class LogRespository {
             entityManager.merge(log);
             transaction.commit();
             return true;
-        }catch (Exception e){
-            e.printStackTrace();
+        }catch (Exception exception){
+            System.out.println(exception.getMessage());
             transaction.rollback();
         }
         return false;
@@ -50,8 +50,8 @@ public class LogRespository {
             System.out.println(a);
             transaction.commit();
             return a;
-        }catch (Exception e){
-            e.printStackTrace();
+        }catch (Exception exception){
+            System.out.println(exception.getMessage());
             transaction.rollback();
         }
         return 0;

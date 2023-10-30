@@ -4,7 +4,6 @@ import jakarta.persistence.*;
 
 @Entity
 @Table(name = "account")
-@NamedQuery(name = "Account.findByEmailAndPassword", query = "Select acc from Account acc where acc.email=:email and acc.password=:password")
 public class Account {
     @Id
     @Column(name = "account_id")

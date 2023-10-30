@@ -1,4 +1,4 @@
-package vn.edu.iuh.fit.respositories;
+package vn.edu.iuh.fit.repositories;
 
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityTransaction;
@@ -8,28 +8,34 @@ import vn.edu.iuh.fit.entities.GrantAccess;
 import vn.edu.iuh.fit.entities.Role;
 
 import java.util.List;
+import java.util.Objects;
 
-public class AccountRespository {
-    private EntityManager entityManager;
-    private EntityTransaction transaction;
+public class AccountRepository {
+    private final EntityManager entityManager;
+    private final EntityTransaction transaction;
+    private final RoleRepository roleRepository;
 
-    public AccountRespository() {
+    public AccountRepository() {
         entityManager = Connection.getInstance().getEntityManagerFactory().createEntityManager();
         transaction = entityManager.getTransaction();
+        roleRepository = new RoleRepository();
     }
     public boolean addAccount(Account account){
         transaction.begin();
         try{
             entityManager.persist(account);
-            if(grantAccount(account.getId(), "user", ""))
-                transaction.commit();
-            else{
-                transaction.rollback();
-                return false;
-            }
+//            if(grantAccount(transaction, account.getId(), "user", ""))
+//                transaction.commit();
+//            else{
+//                transaction.rollback();
+//                return false;
+//            }
+            GrantAccess grantAccess = new GrantAccess(new RoleRepository().getRole("user"), account, true, "");
+            entityManager.persist(grantAccess);
+            transaction.commit();
             return true;
         }catch (Exception exception){
-            exception.printStackTrace();
+            System.out.println(exception.getMessage());
             transaction.rollback();
         }
         return false;
@@ -41,21 +47,22 @@ public class AccountRespository {
             transaction.commit();
             return true;
         }catch (Exception exception){
-            exception.printStackTrace();
+            System.out.println(exception.getMessage());
             transaction.rollback();
         }
         return false;
     }
+
     public boolean grantAccount(String accountId, String roleId, String note){
         transaction.begin();
         try{
             if(note == null) note="";
-            GrantAccess grantAccess = new GrantAccess(new RoleRespository().getRole(roleId), new AccountRespository().getAccountById(accountId), true, note);
+            GrantAccess grantAccess = new GrantAccess(new RoleRepository().getRole(roleId), new AccountRepository().getAccountById(accountId), true, note);
             entityManager.persist(grantAccess);
             transaction.commit();
             return true;
         }catch (Exception exception){
-            exception.printStackTrace();
+            System.out.println(exception.getMessage());
             transaction.rollback();
         }
         return false;
@@ -69,7 +76,7 @@ public class AccountRespository {
             transaction.commit();
             return entityManager.createQuery("FROM Account a WHERE a.status = 1 and a.id IN (SELECT ga.account.id FROM GrantAccess ga WHERE ga.role.id = 'user')", Account.class).getResultList();
         }catch (Exception exception){
-            exception.printStackTrace();
+            System.out.println(exception.getMessage());
             transaction.rollback();
         }
         return null;
@@ -78,34 +85,20 @@ public class AccountRespository {
     public Account getAccountByEmailAndPassword(String email, String password){
         transaction.begin();
         try{
-            Account account = entityManager.createQuery("Select acc from Account acc where acc.email=:email and acc.password=:password", Account.class)
+            Account account = entityManager.createQuery("Select acc from Account acc where acc.email=:email and acc.password=:password and acc.status=1", Account.class)
                     .setParameter("email", email)
                     .setParameter("password", password).getSingleResult();
             transaction.commit();
             return account;
         }catch (Exception exception){
-            exception.printStackTrace();
-            transaction.rollback();
-        }
-        return null;
-    }
-    public List<Role> getRoleFromAccountID(String id){
-        transaction.begin();
-        try {
-            List<Role> roles = entityManager.createQuery(
-                            "SELECT r FROM Role r WHERE id IN " +
-                                    "(SELECT ga.role.id FROM GrantAccess ga WHERE ga.isGrant and ga.account.id = :id)", Role.class)
-                    .setParameter("id", id)
-                    .getResultList();
-            transaction.commit();
-            return roles;
-        }catch (Exception exception){
-            exception.printStackTrace();
+            System.out.println(exception.getMessage());
             transaction.rollback();
         }
         return null;
     }
     public List<Account> getAccountFromRoleName(String name){
+        if(name.equalsIgnoreCase("All"))
+            return getAllAccountUser();
         transaction.begin();
         try {
             List<Account> accounts = entityManager.createQuery("FROM Account a WHERE a.status=1 and a.id IN " +
@@ -116,9 +109,46 @@ public class AccountRespository {
             transaction.commit();
             return accounts;
         }catch (Exception exception){
-            exception.printStackTrace();
+            System.out.println(exception.getMessage());
             transaction.rollback();
         }
         return null;
+    }
+
+    public boolean checkAdmin(String id){
+        transaction.begin();
+        try{
+            boolean check = false;
+            for(Role role: roleRepository.getRoleFromAccountID(id)){
+                if(Objects.equals(role.getId(), "admin")){
+                    check = true;
+                    break;
+                }
+            }
+            transaction.commit();
+            return check;
+        } catch (Exception exception){
+            System.out.println(exception.getMessage());
+            transaction.rollback();
+        }
+        return false;
+    }
+    public boolean checkUser(String id){
+        transaction.begin();
+        try{
+            boolean check = false;
+            for(Role role: roleRepository.getRoleFromAccountID(id)){
+                if(Objects.equals(role.getId(), "user")){
+                    check = true;
+                    break;
+                }
+            }
+            transaction.commit();
+            return check;
+        } catch (Exception exception){
+            System.out.println(exception.getMessage());
+            transaction.rollback();
+        }
+        return false;
     }
 }
