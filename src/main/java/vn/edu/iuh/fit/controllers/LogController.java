@@ -9,33 +9,26 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import vn.edu.iuh.fit.entities.Account;
 import vn.edu.iuh.fit.entities.Log;
-import vn.edu.iuh.fit.entities.Role;
 import vn.edu.iuh.fit.repositories.AccountRepository;
 import vn.edu.iuh.fit.repositories.LogRepository;
-import vn.edu.iuh.fit.repositories.RoleRepository;
 
 import java.io.IOException;
 import java.time.LocalDateTime;
-import java.util.List;
 
 @WebServlet(urlPatterns = {"/logController"})
 public class LogController extends HttpServlet {
 
     private final AccountRepository accountRepository = new AccountRepository();
     private final LogRepository logRepository = new LogRepository();
-    private final RoleRepository roleRepository = new RoleRepository();
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String login = req.getParameter("logIn");
         String logout = req.getParameter("logOut");
-        String findAccountFromRole = req.getParameter("findAccountFromRole");
         if (login != null) {
             handleLogin(req, resp);
         } else if (logout!=null) {
             handleLogOut(req, resp);
-        } else if (findAccountFromRole!=null) {
-            handleFindAccountByRole(req.getParameter("roleSelected"), req, resp);
         }
     }
 
@@ -75,18 +68,8 @@ public class LogController extends HttpServlet {
         HttpSession session = req.getSession();
         Log log = (Log) session.getAttribute("log");
         log.setLogoutTime(timeLogout);
-        System.out.println(log);
         logRepository.updateLog(log);
         RequestDispatcher requestDispatcher = getServletContext().getRequestDispatcher("/index.jsp");
-        requestDispatcher.forward(req, resp);
-    }
-
-    public void handleFindAccountByRole(String roleName, HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        HttpSession session = req.getSession();
-        session.setAttribute("roleSelected", roleName);
-        List<Account> accounts = accountRepository.getAccountFromRoleName(roleName);
-        session.setAttribute("accountByRole", accounts);
-        RequestDispatcher requestDispatcher = getServletContext().getRequestDispatcher("/manageUsers.jsp");
         requestDispatcher.forward(req, resp);
     }
 }

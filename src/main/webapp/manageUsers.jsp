@@ -41,12 +41,13 @@
     %>
     <h4>Admin: <%=acc.getName()%>
     </h4>
-    <form class="w-3" action="accountController" method="post">
+    <form action="logController">
         <div class="mb-3 mt-3 d-flex justify-content-center">
             <label class="display-6 mx-5">Manage Users</label>
             <button type="submit" class="form-btn mx-5" name="logOut">Logout</button>
         </div>
-
+    </form>
+    <form class="w-3" action="accountController" method="post">
         <div class="mb-3 mt-3 d-flex justify-content-center">
             <button type="button" class="form-btn mx-4" data-bs-toggle="modal" data-bs-target="#myModal">Add account
             </button>
@@ -118,6 +119,7 @@
                 </button>
             </div>
         </div>
+        <%}%>
     </form>
     <div class="modal fade" id="myModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
          aria-labelledby="staticBackdropLabel" aria-hidden="true">
@@ -225,40 +227,6 @@
             </div>
         </div>
     </div>
-<%--    <div class="modal fade" id="myModalGrant" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"--%>
-<%--         aria-labelledby="staticBackdropLabel" aria-hidden="true">--%>
-<%--        <div class="modal-dialog">--%>
-<%--            <div class="modal-content">--%>
-<%--                <div class="modal-header">--%>
-<%--                    <h5 class="modal-title">Grant Access</h5>--%>
-<%--                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>--%>
-<%--                </div>--%>
-<%--                <form action="controller">--%>
-<%--                    <div class="modal-body">--%>
-<%--                        <select name="selectRoleGrant">--%>
-<%--                            <%--%>
-<%--                                List<Role> roleGrant = new RoleRepository().getAllRole();--%>
-<%--                                for (Role role : roleGrant) {--%>
-<%--                            %>--%>
-<%--                            <option><%=role.getName()%></option>--%>
-<%--                            <%}%>--%>
-<%--                        </select>--%>
-<%--                        <div class="mb-3">--%>
-<%--                            <label for="grant_acc_note" class="form-label">Note:</label>--%>
-<%--                            <input type="text" class="form-control" id="grant_acc_note" placeholder="Enter Grant Note"--%>
-<%--                                   name="grant_acc_note">--%>
-<%--                        </div>--%>
-<%--                        <input type="hidden" name="grant_acc_id" value="<%=account.getId()%>">--%>
-<%--                    </div>--%>
-<%--                    <div class="modal-footer">--%>
-<%--                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>--%>
-<%--                        <button type="submit" class="btn btn-primary" name="grantAccount">Grant</button>--%>
-<%--                    </div>--%>
-<%--                </form>--%>
-<%--            </div>--%>
-<%--        </div>--%>
-<%--    </div>--%>
-    <%}%>
 </div>
 </body>
 </html>

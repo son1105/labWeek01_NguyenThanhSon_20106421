@@ -24,12 +24,6 @@ public class AccountRepository {
         transaction.begin();
         try{
             entityManager.persist(account);
-//            if(grantAccount(transaction, account.getId(), "user", ""))
-//                transaction.commit();
-//            else{
-//                transaction.rollback();
-//                return false;
-//            }
             GrantAccess grantAccess = new GrantAccess(new RoleRepository().getRole("user"), account, true, "");
             entityManager.persist(grantAccess);
             transaction.commit();
