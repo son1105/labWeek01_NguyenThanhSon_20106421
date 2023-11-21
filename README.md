@@ -38,7 +38,7 @@ Có 2 loại account chính: account admin và account user
     + Thu hồi quyền:
     ![Screenshot (27)](https://github.com/son1105/labWeek01_NguyenThanhSon_20106421/assets/115455297/bb96b51e-52e2-47f1-bf53-8711f9937ecc)
     
-  - Logout: nhấn vào nút Logout để quay trở quay trở về trang đăng nhập. Khi đó đối tượng Log được tạo lúc login sẽ update logoutTime thành thời điểm hiện tại và lưu xuống database.
+  - Logout: nhấn vào nút Logout để quay trở về trang đăng nhập. Khi đó đối tượng Log được tạo lúc login sẽ update logoutTime thành thời điểm hiện tại và lưu xuống database.
     ![Screenshot (29)](https://github.com/son1105/labWeek01_NguyenThanhSon_20106421/assets/115455297/bc802dfb-202d-4665-990e-1b48151e3e9b)
 
 * Account user:
