@@ -22,7 +22,7 @@ public class RoleRepository {
     public List<Role> getAllRole(){
          transaction.begin();
          try {
-             List<Role> roles = entityManager.createQuery("FROM Role r WHERE r.status = 1 and r.id != 'admin' and r.id != 'user'", Role.class).getResultList();
+             List<Role> roles = entityManager.createQuery("FROM Role r WHERE r.status = 1 and r.id != 'admin' and r.id != 'user' ORDER BY REVERSE(r.name)" , Role.class).getResultList();
              transaction.commit();
              return roles;
          }catch (Exception exception){

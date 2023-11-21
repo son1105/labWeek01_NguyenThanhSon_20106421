@@ -11,11 +11,11 @@
     <form action="logController" method="get">
     <div class="mb-3 mt-3">
         <label for="email" class="form-label">Email:</label>
-        <input type="email" class="form-control" id="email" placeholder="Enter email" name="email" value="son@gmail.com">
+        <input type="email" class="form-control" required id="email" placeholder="Enter email" name="email" value="son@gmail.com">
     </div>
     <div class="mb-3">
         <label for="passwd" class="form-label">Password:</label>
-        <input type="password" class="form-control" id="passwd" placeholder="Enter password" name="passwd" value="123">
+        <input type="password" class="form-control" required id="passwd" placeholder="Enter password" name="passwd" value="123">
     </div>
 
     <%

@@ -64,12 +64,11 @@
                 <h5 class="my-4">Phone: <%=account.getPhone()%>
                 </h5>
                 <%}%>
-
             </div>
         </div>
         <div class="bg-warning w-75 p-4">
-            <h4 class="text-center" style="text-align: center">Roles</h4>
-            <table class="table table-hover text-center fs-5" style="width: 100%;">
+                <h4 class="text-center" style="text-align: center">Roles</h4>
+            <table class="table table-hover text-center fs-5 mt-2" style="width: 100%;">
                 <thead>
                 <tr>
                     <th>Id</th>
@@ -91,7 +90,9 @@
                             String note = "";
                             GrantAccessRepository grantAccessRepository = new GrantAccessRepository();
                             GrantAccess grantAccess;
+                            int i=0;
                             for (Role role : roles) {
+                                i++;
                                 grantAccess = grantAccessRepository.getOneByAccountIdAndRoleId(account.getId(), role.getId());
                                 if (grantAccess != null)
                                     note = grantAccess.getNote();
