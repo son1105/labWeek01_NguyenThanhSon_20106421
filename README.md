@@ -5,7 +5,7 @@ Có 2 loại account chính: account admin và account user
   - Một số account user khác có lưu trong database
     ![Screenshot (21)](https://github.com/son1105/labWeek01_NguyenThanhSon_20106421/assets/115455297/0dc9c635-343d-4973-a2e2-01437e221e53)
 
-  - Nếu nhập sai email hoặc password hoặc account đó có Status=-1(đã bị xoá) sẽ báo lỗi
+  - Nếu nhập sai email hoặc password hoặc account đó có status=-1(đã bị xoá) sẽ báo lỗi
     ![Screenshot (23)](https://github.com/son1105/labWeek01_NguyenThanhSon_20106421/assets/115455297/90ffd0c0-d718-445c-95e3-d3b47a662c8a)
 
   - Nếu account phù hợp nhưng không được phân quyền user sẽ không thể đăng nhập được(Account test: phong password: 123).
