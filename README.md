@@ -42,6 +42,6 @@ Có 2 loại account chính: account admin và account user
     ![Screenshot (29)](https://github.com/son1105/labWeek01_NguyenThanhSon_20106421/assets/115455297/bc802dfb-202d-4665-990e-1b48151e3e9b)
 
 * Account user:
-  - Logout && Login giống với admin
+  - Login && Logout giống với admin
   - Sau khi login thành công sẽ hiển thị thông tin và quyền của user.
     ![Screenshot (30)](https://github.com/son1105/labWeek01_NguyenThanhSon_20106421/assets/115455297/be9c860a-6b0f-4f5a-ad88-6e24ddb3d005)
