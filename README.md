@@ -16,14 +16,14 @@ Có 2 loại account chính: account admin và account user
 
 * Account admin:
   - Có thể xem danh sách các user với các quyền tương ứng
-    ![Screenshot (16)](https://github.com/son1105/labWeek01_NguyenThanhSon_20106421/assets/115455297/da63778c-db59-4b0a-b67d-1d9b9bf88a3b)
-    
+    ![Screenshot (31)](https://github.com/son1105/labWeek01_NguyenThanhSon_20106421/assets/115455297/23fd7bd1-78e8-4f88-9239-5929862651bc)
+
   - Có thể lọc user theo role bằng cách chọn vào combobox và nhấn "Account From Role"
     ![Screenshot (17)](https://github.com/son1105/labWeek01_NguyenThanhSon_20106421/assets/115455297/6b89edd6-7f1e-4a4a-9117-85e1d0c52226)
     
-  - Có thể thêm 1 user mới bằng cách nhấn vào Add account, khi thêm thành công sẽ tự động tạo tài khoản và phân quyền user. Khi đó tài khoản này có thể đăng nhập bằng id vừa tạo với password mặc định là 123.
+  - Có thể thêm 1 user mới bằng cách nhấn vào Add account, khi thêm thành công sẽ tự động tạo tài khoản và phân quyền user. Khi đó, user này có thể đăng nhập bằng id vừa tạo với password mặc định là 123.
     ![Screenshot (18)](https://github.com/son1105/labWeek01_NguyenThanhSon_20106421/assets/115455297/7219fd33-827e-436d-8dbc-86493cfe0bdd)
-    ![Screenshot (19)](https://github.com/son1105/labWeek01_NguyenThanhSon_20106421/assets/115455297/32556aea-d446-4227-a03e-7a03e444392b)
+    ![Screenshot (32)](https://github.com/son1105/labWeek01_NguyenThanhSon_20106421/assets/115455297/808b103c-f410-4af8-ad13-c8ce97768b81)
 
   - Có thể update 1 user bằng cách nhấn vào nút Update bên cạnh user đó, điền thông tin(ngoại trừ id) và nhấn Update
     ![Screenshot (20)](https://github.com/son1105/labWeek01_NguyenThanhSon_20106421/assets/115455297/33451ddf-3893-40d2-8a52-975f4385e863)
