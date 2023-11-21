@@ -34,9 +34,9 @@ public class LogController extends HttpServlet {
 
     public void handleLogin(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         LocalDateTime timeLogin = LocalDateTime.now();
-        String email = req.getParameter("email");
+        String id = req.getParameter("id");
         String password = req.getParameter("passwd");
-        Account account = accountRepository.getAccountByEmailAndPassword(email, password);
+        Account account = accountRepository.getAccountByIdAndPassword(id, password);
         RequestDispatcher requestDispatcher;
         if (account != null) {
             if(accountRepository.checkAdmin(account.getId()) || accountRepository.checkUser(account.getId())){

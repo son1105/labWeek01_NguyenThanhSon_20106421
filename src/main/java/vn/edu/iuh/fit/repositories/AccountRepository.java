@@ -76,11 +76,11 @@ public class AccountRepository {
         return null;
     }
 
-    public Account getAccountByEmailAndPassword(String email, String password){
+    public Account getAccountByIdAndPassword(String id, String password){
         transaction.begin();
         try{
-            Account account = entityManager.createQuery("Select acc from Account acc where acc.email=:email and acc.password=:password and acc.status=1", Account.class)
-                    .setParameter("email", email)
+            Account account = entityManager.createQuery("Select acc from Account acc where acc.id=:id and acc.password=:password and acc.status=1", Account.class)
+                    .setParameter("id", id)
                     .setParameter("password", password).getSingleResult();
             transaction.commit();
             return account;

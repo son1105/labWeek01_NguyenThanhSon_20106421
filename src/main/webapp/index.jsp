@@ -11,7 +11,7 @@
     <form action="logController" method="get">
     <div class="mb-3 mt-3">
         <label for="email" class="form-label">Email:</label>
-        <input type="email" class="form-control" required id="email" placeholder="Enter email" name="email" value="son@gmail.com">
+        <input type="text" class="form-control" required id="email" placeholder="Enter userName" name="id" value="son">
     </div>
     <div class="mb-3">
         <label for="passwd" class="form-label">Password:</label>
