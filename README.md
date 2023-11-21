@@ -32,7 +32,10 @@ Có 2 loại account chính: account admin và account user
     ![Screenshot (25)](https://github.com/son1105/labWeek01_NguyenThanhSon_20106421/assets/115455297/80a1d284-a179-46ed-8c7b-4e02e0a51a21)
 
   - Phân quyền/thu hồi quyền user bằng cách nhấn vào nút Grant bên cạnh user. Cột status sẽ thể hiện việc user đó đã được phân quyền này. Chọn vào các checkbox để thực hiện phân quyền hoặc thu hồi quyền của user.
+    + Phân quyền:
     ![Screenshot (26)](https://github.com/son1105/labWeek01_NguyenThanhSon_20106421/assets/115455297/b7362374-d80f-4cb0-9d5c-d80b0c7f0fde)
+
+    + Thu hồi quyền:
     ![Screenshot (27)](https://github.com/son1105/labWeek01_NguyenThanhSon_20106421/assets/115455297/bb96b51e-52e2-47f1-bf53-8711f9937ecc)
     
   - Logout: nhấn vào nút Logout để quay trở quay trở về trang đăng nhập. Khi đó đối tượng Log được tạo lúc login sẽ update logoutTime thành thời điểm hiện tại và lưu xuống database.
